@@ -40,18 +40,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>~/GameServer/trunk</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>~/GameServer/trunk</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>~/GameServer/trunk</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>~/GameServer/trunk</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -73,16 +77,42 @@
     </SourcesToCopyRemotelyOverride>
     <LocalRemoteCopySources>false</LocalRemoteCopySources>
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
-    <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make clean;make</RemoteReBuildCommandLine>
-    <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make clean</RemoteCleanCommandLine>
+    <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
+    <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <SourcesToCopyRemotelyOverride>
     </SourcesToCopyRemotelyOverride>
-    <LocalRemoteCopySources>false</LocalRemoteCopySources>
+    <LocalRemoteCopySources>true</LocalRemoteCopySources>
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
-    <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make clean;make</RemoteReBuildCommandLine>
-    <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make clean</RemoteCleanCommandLine>
+    <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
+    <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
+    <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
+    <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
+    <SourcesToCopyRemotelyOverride />
+    <LocalRemoteCopySources>false</LocalRemoteCopySources>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
+    <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
+    <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
+    <SourcesToCopyRemotelyOverride />
+    <LocalRemoteCopySources>false</LocalRemoteCopySources>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
+    <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
+    <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
+    <SourcesToCopyRemotelyOverride />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
+    <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
+    <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
+    <SourcesToCopyRemotelyOverride />
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
