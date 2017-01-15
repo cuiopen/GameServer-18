@@ -115,7 +115,11 @@
     <SourcesToCopyRemotelyOverride />
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="Base\Lock.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base\Lock.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
