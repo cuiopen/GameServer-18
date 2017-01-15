@@ -56,7 +56,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
-    <RemoteRootDir>~/LearnGameServer/trunk</RemoteRootDir>
+    <RemoteRootDir>~/LearnGameServer/trunk/GameServer</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -69,15 +69,15 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <SourcesToCopyRemotelyOverride />
-    <LocalRemoteCopySources>false</LocalRemoteCopySources>
+    <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely)</SourcesToCopyRemotelyOverride>
+    <LocalRemoteCopySources>true</LocalRemoteCopySources>
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
     <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make clean;make</RemoteReBuildCommandLine>
     <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make clean</RemoteCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <SourcesToCopyRemotelyOverride />
-    <LocalRemoteCopySources>false</LocalRemoteCopySources>
+    <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely)</SourcesToCopyRemotelyOverride>
+    <LocalRemoteCopySources>true</LocalRemoteCopySources>
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
     <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make clean;make</RemoteReBuildCommandLine>
     <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make clean</RemoteCleanCommandLine>
