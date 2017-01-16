@@ -73,16 +73,14 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <SourcesToCopyRemotelyOverride>
-    </SourcesToCopyRemotelyOverride>
-    <LocalRemoteCopySources>false</LocalRemoteCopySources>
+    <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely)</SourcesToCopyRemotelyOverride>
+    <LocalRemoteCopySources>true</LocalRemoteCopySources>
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
     <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
     <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <SourcesToCopyRemotelyOverride>
-    </SourcesToCopyRemotelyOverride>
+    <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely)</SourcesToCopyRemotelyOverride>
     <LocalRemoteCopySources>true</LocalRemoteCopySources>
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
     <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
@@ -92,34 +90,34 @@
     <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
     <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
-    <SourcesToCopyRemotelyOverride />
-    <LocalRemoteCopySources>false</LocalRemoteCopySources>
+    <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely)</SourcesToCopyRemotelyOverride>
+    <LocalRemoteCopySources>true</LocalRemoteCopySources>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
     <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
-    <SourcesToCopyRemotelyOverride />
-    <LocalRemoteCopySources>false</LocalRemoteCopySources>
+    <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely)</SourcesToCopyRemotelyOverride>
+    <LocalRemoteCopySources>true</LocalRemoteCopySources>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
     <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
-    <SourcesToCopyRemotelyOverride />
+    <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely)</SourcesToCopyRemotelyOverride>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
     <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
-    <SourcesToCopyRemotelyOverride />
+    <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely)</SourcesToCopyRemotelyOverride>
   </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="Base\Lock.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Lock.h" />
+    <ClInclude Include="Base\Uncopiable.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

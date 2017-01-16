@@ -1,18 +1,9 @@
-#ifndef _LOCK_H
-#define _LOCK_H
+#ifndef _Lock_H
+#define _Lock_H
 
 #include <pthread.h>
+#include "Uncopiable.h"
 
-class Uncopiable
-{
-public:
-	Uncopiable() {}
-	~Uncopiable() {}
-
-private:
-	Uncopiable(const Uncopiable&);
-	Uncopiable& operator =(const Uncopiable&);
-};
 class MyLock : Uncopiable
 {
 public:
@@ -63,5 +54,5 @@ private:
 };
 
 
-#endif // _LOCK_H
+#endif // _Lock_H
 

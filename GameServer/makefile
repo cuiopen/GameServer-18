@@ -12,12 +12,12 @@ TARGET  := gameserver
   
 #compile and lib parameter
 #编译参数
-CC      := gcc
+CC      := g++
 LIBS    :=
 LDFLAGS :=
 DEFINES :=
 INCLUDE := -I.
-CFLAGS  := -g -Wall -O3 $(DEFINES) $(INCLUDE)
+CFLAGS  := -g -Wall -std=c++11 -O3 $(DEFINES) $(INCLUDE)
 CXXFLAGS:= $(CFLAGS) -DHAVE_CONFIG_H
   
   
