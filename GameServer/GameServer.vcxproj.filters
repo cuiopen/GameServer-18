@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base\Uncopiable.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Lock.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Base">
+      <UniqueIdentifier>{fe098652-a1ca-494e-85a9-b1307cc5dae3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -17,7 +17,7 @@ LIBS    :=
 LDFLAGS :=
 DEFINES :=
 INCLUDE := -I.
-CFLAGS  := -g -Wall -std=c++11 -O3 $(DEFINES) $(INCLUDE)
+CFLAGS  := -g -Wall  -Werror -std=c++11 -O3 $(DEFINES) $(INCLUDE)
 CXXFLAGS:= $(CFLAGS) -DHAVE_CONFIG_H
   
   

@@ -92,6 +92,7 @@
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
     <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely)</SourcesToCopyRemotelyOverride>
     <LocalRemoteCopySources>true</LocalRemoteCopySources>
+    <AdditionalSourcesToCopyMapping>makefile</AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
@@ -105,6 +106,7 @@
     <RemoteReBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make rebuild</RemoteReBuildCommandLine>
     <RemoteBuildCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make</RemoteBuildCommandLine>
     <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely)</SourcesToCopyRemotelyOverride>
+    <AdditionalSourcesToCopyMapping>makefile</AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <RemoteCleanCommandLine>cd  $(RemoteRootDir)/$(ProjectName); make veryclean</RemoteCleanCommandLine>
