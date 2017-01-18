@@ -1,12 +1,20 @@
 #include <cstdio>
 #include <pthread.h>
 #include "Base/Lock.h"
-#include <sys/socket.h>
+
+extern "C"
+{
+#include "3rd/lua/src/lua.h"
+#include "3rd/lua/src/lualib.h"
+#include "3rd/lua/src/lauxlib.h"
+}
 
 int main(int argc, char *argv[])
 {
-	char sz[128] = { 0 };
-	sprintf(sz, "Function:%s, Line:%d\n", __FUNCTION__, __LINE__);
-	printf(sz);
+	lua_State *pLua = nullptr;
+	pLua = luaL_newstate();
+	luaL_openlibs(pLua);
+	luaL_dofile(pLua, "./Scripts/hello.lua");
+	lua_close(pLua);
 	return 0;
 }

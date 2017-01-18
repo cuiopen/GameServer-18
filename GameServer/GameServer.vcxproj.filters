@@ -15,5 +15,14 @@
     <Filter Include="Base">
       <UniqueIdentifier>{fe098652-a1ca-494e-85a9-b1307cc5dae3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{ac50176c-da0e-4162-b5bc-fd3eeb36cfb1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="makefile" />
+    <None Include="Scripts\hello.lua">
+      <Filter>Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>

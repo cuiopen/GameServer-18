@@ -13,7 +13,7 @@ TARGET  := gameserver
 #compile and lib parameter
 #编译参数
 CC      := g++
-LIBS    :=
+LIBS    := ./3rd/lua/src/liblua.a -ldl
 LDFLAGS :=
 DEFINES :=
 INCLUDE := -I.

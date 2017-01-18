@@ -121,6 +121,10 @@
     <ClInclude Include="Base\Lock.h" />
     <ClInclude Include="Base\Uncopiable.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="makefile" />
+    <None Include="Scripts\hello.lua" />
+  </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
