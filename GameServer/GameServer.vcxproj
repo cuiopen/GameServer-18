@@ -115,10 +115,12 @@
     <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely)</SourcesToCopyRemotelyOverride>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="Base\Thread.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Lock.h" />
+    <ClInclude Include="Base\Thread.h" />
     <ClInclude Include="Base\Uncopiable.h" />
   </ItemGroup>
   <ItemGroup>
