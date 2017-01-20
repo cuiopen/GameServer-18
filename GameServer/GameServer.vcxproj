@@ -115,11 +115,17 @@
     <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely)</SourcesToCopyRemotelyOverride>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="Base\HttpPacket.cpp" />
+    <ClCompile Include="Base\HttpServer.cpp" />
     <ClCompile Include="Base\Thread.cpp" />
     <ClCompile Include="Main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Base\CommonDefine.h" />
+    <ClInclude Include="Base\HttpPacket.h" />
+    <ClInclude Include="Base\HttpServer.h" />
     <ClInclude Include="Base\Lock.h" />
+    <ClInclude Include="Base\Singleton.h" />
     <ClInclude Include="Base\Thread.h" />
     <ClInclude Include="Base\Uncopiable.h" />
   </ItemGroup>

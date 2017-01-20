@@ -1,28 +1,18 @@
 #include <cstdio>
-#include "../Base/Thread.h"
+#include "../Base/HttpServer.h"
 #include <iostream>
 #include <string>
 
-class MyClass : public CThread
-{
-public:
-	bool Run()
-	{
-		printf("Hello World!");
-		return true;
-	}
-};
-
-
 int main(int argc, char *argv[])
 {
-	MyClass myThread;
-	myThread.Start();
-
+	CHttpServer::Instance()->InitServer("192.168.21.129", 6666);
+	CHttpServer::Instance()->Start();
 	std::string strCMD;
 	while (true)
 	{
 		std::cin >> strCMD;
+		if (strCMD == "exit")
+			return 0;
 	}
 	return 0;
 }

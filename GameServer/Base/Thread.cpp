@@ -7,13 +7,14 @@ void *CThread::ThreadFunction(void * pParm)
 	if (nullptr == pThread)
 		return nullptr;
 
-	pThread->SetStatus(TREAD_STATUS_RUNNING);
+	pThread->SetStatus(THREAD_STATUS_RUNNING);
 	while (pThread->Run())
 	{
 		usleep(pThread->m_uSleepMill);
 	}
 
-	pThread->SetStatus(TREAD_STATUS_EXIT);
+	pThread->SetStatus(THREAD_STATUS_EXIT);
+	pThread->Exit();
 
 	return nullptr;
 }
@@ -25,7 +26,7 @@ CThread::~CThread()
 
 bool CThread::Start()
 {
-	if (TREAD_STATUS_READY != m_btStatus)
+	if (THREAD_STATUS_READY != m_btStatus)
 		return false;
 
 	return 0 == pthread_create(&m_tID, nullptr, ThreadFunction, this);
@@ -36,15 +37,29 @@ pthread_t CThread::GetThreadID () const
 	return m_tID;
 }
 
-unsigned char CThread::GetStatus() const
+unsigned char CThread::GetStatus()
 {
+	AutoLock autoLock(m_lockStatus);
 	return m_btStatus;
+}
+
+bool CThread::IsRun()
+{
+	AutoLock autoLock(m_lockStatus);
+	if (THREAD_STATUS_RUNNING == m_btStatus)
+		return true;
+	return false;
+}
+
+bool CThread::IsClose()
+{
+	AutoLock autoLock(m_lockStatus);
+	return (THREAD_STATUS_EXIT == m_btStatus || THREAD_STATUS_EXITING == m_btStatus);
 }
 
 bool CThread::Exit()
 {
 	pthread_exit(nullptr);
-	m_btStatus = TREAD_STATUS_EXIT;
 }
 
 void CThread::Join()
@@ -54,5 +69,13 @@ void CThread::Join()
 
 void CThread::SetStatus(unsigned char btStatus)
 {
+	AutoLock autoLock(m_lockStatus);
 	m_btStatus = btStatus;
+}
+
+bool CThread::Run()
+{
+	if (IsClose())
+		return false;
+	return true;
 }

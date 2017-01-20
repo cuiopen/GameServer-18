@@ -7,6 +7,12 @@
     <ClCompile Include="Main\main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="Base\HttpPacket.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\HttpServer.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Uncopiable.h">
@@ -16,6 +22,18 @@
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="Base\Thread.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Singleton.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\HttpPacket.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\HttpServer.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\CommonDefine.h">
       <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
