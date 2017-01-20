@@ -37,7 +37,7 @@ public:
 private:
 	pthread_t m_tID = 0;
 	unsigned char m_btStatus = THREAD_STATUS_READY;
-	unsigned int m_uSleepMill = 0;
+	unsigned int m_uSleepMill = 5;
 	MyLock m_lockStatus;
 };
 

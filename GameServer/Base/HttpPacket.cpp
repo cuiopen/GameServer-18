@@ -1,6 +1,7 @@
 #include "HttpPacket.h"
 #include <string.h>
 #include <unistd.h>
+#include <cstdio>
 
 void HttpPacket::Rest()
 {
@@ -12,6 +13,7 @@ void HttpPacket::Rest()
 
 bool HttpPacket::Execute()
 {
+	printf(m_szBuffer);
 	close(m_clientSocket);
 	return false;
 }

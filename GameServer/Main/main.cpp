@@ -2,17 +2,16 @@
 #include "../Base/HttpServer.h"
 #include <iostream>
 #include <string>
+#include <unistd.h>
 
 int main(int argc, char *argv[])
 {
-	CHttpServer::Instance()->InitServer("192.168.21.129", 6666);
-	CHttpServer::Instance()->Start();
-	std::string strCMD;
+	if (CHttpServer::Instance()->InitServer("192.168.210.129", 6666))
+		CHttpServer::Instance()->Start();
+
 	while (true)
 	{
-		std::cin >> strCMD;
-		if (strCMD == "exit")
-			return 0;
+		usleep(5);
 	}
 	return 0;
 }

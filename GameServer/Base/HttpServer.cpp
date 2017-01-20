@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include "HttpServer.h"
 #include "CommonDefine.h"
+#include <cstdio>
 
 CHttpServer::~CHttpServer()
 {
@@ -37,6 +38,7 @@ bool CHttpServer::InitServer(const char * pszIP, unsigned int nPort)
 
 	if (-1 == bind(m_socketServer, (struct sockaddr*)&fd_server, sizeof(struct sockaddr)))
 	{ 
+		printf("[Error]Server bind failed! Function:%s, Line:%d\n", __FUNCTION__, __LINE__);
 		close(m_socketServer);
 		return false;
 	}
@@ -92,7 +94,7 @@ void CHttpServer::ProcessReciveMessage()
 			continue;
 		}
 
-		nReadLenght = recv(pPacket->m_clientSocket, pPacket->m_szBuffer, 1024, 0);
+		nReadLenght = recv(pPacket->m_clientSocket, pPacket->m_szBuffer, sizeof(pPacket->m_szBuffer), 0);
 		if (-1 == nReadLenght)
 		{
 			close(pPacket->m_clientSocket);
