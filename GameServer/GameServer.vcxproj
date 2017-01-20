@@ -116,7 +116,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="Base\Thread.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Lock.h" />

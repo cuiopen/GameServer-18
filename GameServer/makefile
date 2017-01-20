@@ -3,20 +3,26 @@
 ######################################
 #source file
 #源文件，自动找所有.c和.cpp文件，并将目标定义为同名.o文件
-SOURCE  := $(wildcard *.c ./Base/*.c) $(wildcard *.cpp ./Base/*.cpp)
+
+SOURCE  := $(wildcard *.c) $(wildcard *.cpp) \
+		   $(wildcard ./Base/*.c) $(wildcard ./Base/*.cpp) \
+		   $(wildcard ./Main/*.c) $(wildcard ./Main/*.cpp)
+
 OBJS    := $(patsubst %.c,%.o,$(patsubst %.cpp,%.o,$(SOURCE)))
   
 #target you can change test to what you want
 #目标文件名，输入任意你想要的执行文件名
+
 TARGET  := gameserver
   
 #compile and lib parameter
 #编译参数
+
 CC      := g++
 LIBS    := ./3rd/lua/src/liblua.a -ldl -pthread
 LDFLAGS :=
 DEFINES :=
-INCLUDE := -I. -I ./Base
+INCLUDE := -I . -I ./Base -I ./Main
 CFLAGS  := -g -Wall  -Werror -std=c++11 -O3 $(DEFINES) $(INCLUDE)
 CXXFLAGS:= $(CFLAGS) -DHAVE_CONFIG_H
   

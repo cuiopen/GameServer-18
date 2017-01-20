@@ -1,5 +1,5 @@
 #include <cstdio>
-#include "Base/Thread.h"
+#include "../Base/Thread.h"
 #include <iostream>
 #include <string>
 
