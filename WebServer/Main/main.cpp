@@ -1,12 +1,12 @@
 #include <cstdio>
-#include "../Base/HttpServer.h"
+#include "../../Base/HttpServer.h"
 #include <iostream>
 #include <string>
 #include <unistd.h>
 
 int main(int argc, char *argv[])
 {
-	if (CHttpServer::Instance()->InitServer("192.168.210.129", 6666))
+	if (CHttpServer::Instance()->InitServer("127.0.0.1", 6666))
 		CHttpServer::Instance()->Start();
 
 	while (true)
