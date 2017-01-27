@@ -10,7 +10,7 @@ class CHttpServer : public CThread, public Singleton<CHttpServer>
 {
 public:
 	~CHttpServer();
-	bool InitServer(const char* pszIP, unsigned int nPort);
+	bool InitServer(const char* pszIP, unsigned short int nPort);
 	bool Start();
 private:
 	void ProcessLogic();

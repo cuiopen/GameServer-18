@@ -1,6 +1,6 @@
 #include <sys/socket.h>
-#include<netinet/in.h>
-#include<arpa/inet.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #include <unistd.h>
 #include "HttpServer.h"
 #include "CommonDefine.h"
@@ -22,7 +22,7 @@ CHttpServer::~CHttpServer()
 	m_deqHttpRequest.clear();
 }
 
-bool CHttpServer::InitServer(const char * pszIP, unsigned int nPort)
+bool CHttpServer::InitServer(const char * pszIP, unsigned short int nPort)
 {
 	if (nullptr == pszIP || 0 == pszIP[0] || 0 == nPort)
 		return false;
@@ -31,12 +31,12 @@ bool CHttpServer::InitServer(const char * pszIP, unsigned int nPort)
 	if (-1 == m_socketServer)
 		return false;
 
-	sockaddr_in fd_server = { 0 };
-	fd_server.sin_family = AF_INET;
-	fd_server.sin_port = htonl(nPort);
-	fd_server.sin_addr.s_addr = inet_addr(pszIP);
+	struct sockaddr_in server_sockaddr = { 0 };
+	server_sockaddr.sin_family = AF_INET;
+	server_sockaddr.sin_port = htons(nPort);
+	server_sockaddr.sin_addr.s_addr = inet_addr(pszIP);
 
-	if (-1 == bind(m_socketServer, (struct sockaddr*)&fd_server, sizeof(struct sockaddr)))
+	if (-1 == bind(m_socketServer, (struct sockaddr*)&server_sockaddr, sizeof(struct sockaddr)))
 	{ 
 		printf("[Error]Server bind failed! Function:%s, Line:%d\n", __FUNCTION__, __LINE__);
 		close(m_socketServer);
@@ -45,6 +45,7 @@ bool CHttpServer::InitServer(const char * pszIP, unsigned int nPort)
 
 	if (-1 == listen(m_socketServer, SOMAXCONN))
 	{
+		printf("[Error]Server listen failed! Function:%s, Line:%d\n", __FUNCTION__, __LINE__);
 		close(m_socketServer);
 		return false;
 	}
@@ -57,10 +58,12 @@ bool CHttpServer::InitServer(const char * pszIP, unsigned int nPort)
 
 bool CHttpServer::Start()
 {
-	if (0 == pthread_create(&m_tThreadReciveID, nullptr, ThreadRecive, this))
+	if (0 != pthread_create(&m_tThreadReciveID, nullptr, ThreadRecive, this))
+	{
+		printf("[Error]ThreadRecive Start failed! Function:%s, Line:%d\n", __FUNCTION__, __LINE__);
 		return false;
-
-	return Parrent::Start();
+	}
+	return CThread::Start();
 }
 
 void CHttpServer::ProcessLogic()
@@ -89,6 +92,7 @@ void CHttpServer::ProcessReciveMessage()
 		pPacket->m_clientSocket = accept(m_socketServer, (struct sockaddr*)&fd_client, &nlenght);
 		if (-1 == pPacket->m_clientSocket)
 		{
+			printf("[Error]Server accept failed! Function:%s, Line:%d\n", __FUNCTION__, __LINE__);
 			close(pPacket->m_clientSocket);
 			this->AddFreeHttpPacket(pPacket);
 			continue;
@@ -97,6 +101,7 @@ void CHttpServer::ProcessReciveMessage()
 		nReadLenght = recv(pPacket->m_clientSocket, pPacket->m_szBuffer, sizeof(pPacket->m_szBuffer), 0);
 		if (-1 == nReadLenght)
 		{
+			printf("[Error]Server recv failed! Function:%s, Line:%d\n", __FUNCTION__, __LINE__);
 			close(pPacket->m_clientSocket);
 			continue;
 		}
@@ -133,10 +138,10 @@ bool CHttpServer::Run()
 		ProcessLogic();
 	}
 
-	return Parrent::Run();
+	return CThread::Run();
 }
 
-void * CHttpServer::ThreadRecive(void * pParm)
+void *CHttpServer::ThreadRecive(void * pParm)
 {
 	CHttpServer *pHttpServer = static_cast<CHttpServer*>(pParm);
 	if (nullptr == pHttpServer)

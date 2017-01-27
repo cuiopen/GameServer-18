@@ -31,9 +31,6 @@ private:
 	static void *ThreadFunction(void *pParm);
 	void SetStatus(unsigned char btStatus);
 
-public:
-	typedef CThread Parrent;
-
 private:
 	pthread_t m_tID = 0;
 	unsigned char m_btStatus = THREAD_STATUS_READY;
