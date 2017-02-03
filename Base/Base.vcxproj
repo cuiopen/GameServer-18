@@ -107,14 +107,18 @@
     <ClInclude Include="HttpPacket.h" />
     <ClInclude Include="HttpServer.h" />
     <ClInclude Include="Lock.h" />
+    <ClInclude Include="LogServer.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Thread.h" />
+    <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Uncopiable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HttpPacket.cpp" />
     <ClCompile Include="HttpServer.cpp" />
+    <ClCompile Include="LogServer.cpp" />
     <ClCompile Include="Thread.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="makefile" />

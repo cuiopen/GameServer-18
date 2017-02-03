@@ -5,5 +5,9 @@
 #define SAFE_DELETE(x)	do { delete (x); (x) = nullptr; } while(false)
 #endif
 
+#ifndef SAFE_DELETE_ARRAY
+#define SAFE_DELETE_ARRAY(x) do { delete[] (x); (x) = nullptr; } while(false)
+#endif
+
 #endif // _CommonDefine_H
 
