@@ -5,6 +5,7 @@
 #include "Singleton.h"
 #include "Thread.h"
 #include <string>
+#include <atomic>
 
 #define MAX_LOG_CACHE_SIZE  1024 * 1024 * 4
 
@@ -30,12 +31,11 @@ private:
 	void FlushLogToFile(unsigned char btLogType);
 
 private:
-	MyLock m_objLockLog[Log_Num];
 	std::vector<std::string> m_vecLogFile;
 	std::string m_strProcessName;
 	unsigned char m_LogSaveFlag[Log_Num] = { 0 };
 	unsigned char m_LogPrintFlag[Log_Num] = { 0 };
-	char *m_LogCache[Log_Num] = { nullptr };
+	std::atomic<char*> m_LogCache[Log_Num];
 	unsigned long m_LogPos[Log_Num] = { 0 };
 };
 

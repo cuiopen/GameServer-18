@@ -35,6 +35,7 @@ bool CLog::Init(const char * pszName)
 	for (size_t i = 0; i < Log_Num; ++i)
 	{
 		m_LogSaveFlag[i] = 1;
+		m_LogCache[i] = nullptr;
 	}
 	return true;
 }
@@ -87,11 +88,8 @@ void CLog::SaveLogToCache(unsigned char btLogType, char * pszBuffer, size_t nLen
 		this->FlushLogToFile(btLogType);
 	}
 
-	{
-		AutoLock autoLock(m_objLockLog[btLogType]);
-		memcpy(&m_LogCache[btLogType][m_LogPos[btLogType]], pszBuffer, nLength);
-		m_LogPos[btLogType] += nLength;
-	}
+	memcpy(&m_LogCache[btLogType][m_LogPos[btLogType]], pszBuffer, nLength);
+	m_LogPos[btLogType] += nLength;
 
 	if (Log_Assert == btLogType)
 		FlushLogToFile(btLogType);
@@ -105,7 +103,6 @@ void CLog::FlushLogToFile(unsigned char btLogType)
 	std::string strFile = "";
 	if (Log_Num != btLogType)
 	{
-		AutoLock autoLock(m_objLockLog[btLogType]);
 		if (0 == m_LogSaveFlag[btLogType])
 			return;
 		
@@ -130,7 +127,6 @@ void CLog::FlushLogToFile(unsigned char btLogType)
 	{
 		for (size_t i = 0; i < Log_Num; ++i)
 		{
-			AutoLock autoLock(m_objLockLog[i]);
 			if (0 == m_LogSaveFlag[i])
 				continue;
 

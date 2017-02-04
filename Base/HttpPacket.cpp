@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <cstdio>
 #include <sys/socket.h>
+#include "Log.h"
 
 void HttpPacket::Rest()
 {
@@ -14,7 +15,7 @@ void HttpPacket::Rest()
 
 bool HttpPacket::Execute()
 {
-	printf(m_szBuffer);
+	SaveDebugLog("Get Message:%s", m_szBuffer);
 
 	char html[] =
 		"HTTP/1.1 200 OK\r\n"
