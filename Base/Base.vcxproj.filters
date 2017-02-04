@@ -27,10 +27,10 @@
     <ClInclude Include="Uncopiable.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="LogServer.h">
+    <ClInclude Include="TimeManager.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="TimeManager.h">
+    <ClInclude Include="Log.h">
       <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,10 +44,10 @@
     <ClCompile Include="Thread.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="LogServer.cpp">
+    <ClCompile Include="TimeManager.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="TimeManager.cpp">
+    <ClCompile Include="Log.cpp">
       <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
