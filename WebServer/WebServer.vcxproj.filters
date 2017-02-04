@@ -4,6 +4,9 @@
     <ClCompile Include="Main\main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="Main\WebServer.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="makefile" />
@@ -18,5 +21,10 @@
     <Filter Include="Scripts">
       <UniqueIdentifier>{0cfa872c-d0f2-4ba5-92c3-342096197ad0}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Main\WebServer.h">
+      <Filter>Main</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

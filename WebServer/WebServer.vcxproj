@@ -119,10 +119,14 @@
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="Main\main.cpp" />
+    <ClCompile Include="Main\WebServer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="makefile" />
     <None Include="Scripts\hello.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Main\WebServer.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

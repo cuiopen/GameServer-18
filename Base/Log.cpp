@@ -11,7 +11,7 @@ CLog::~CLog()
 {
 }
 
-bool CLog::InitServer(const char * pszName)
+bool CLog::Init(const char * pszName)
 {
 	if (nullptr == pszName || strlen(pszName) < 1)
 	{
@@ -39,7 +39,7 @@ bool CLog::InitServer(const char * pszName)
 	return true;
 }
 
-bool CLog::SaveLogEx(unsigned char usLogType, char * pszFunction, unsigned long unLine, pthread_t unThreadID, char * pszLog, ...)
+void CLog::SaveLogEx(unsigned char btLogType, const char * pszFunction, unsigned long unLine, pthread_t unThreadID, const char * pszLog, ...)
 {
 	char szTemLogFormat[4096] = { 0 };
 	va_list argptr;
@@ -47,15 +47,11 @@ bool CLog::SaveLogEx(unsigned char usLogType, char * pszFunction, unsigned long 
 	vsprintf(szTemLogFormat, pszLog, argptr);
 	va_end(argptr);
 
-	time_t tCurrentTime = time(NULL);
-	struct tm objNew;
-	memset(&objNew, 0, sizeof(struct tm));
-	memcpy(&objNew, localtime(&tCurrentTime), sizeof(struct tm));
 	char szTime[1024];
 	sprintf(szTime, "Thread: %ld  Func: [%s]  Line: [%ld] Log: Time: %s  \n", unThreadID, pszFunction, unLine, CTimeManager::Instance()->GetYYYYMMDDHHMMSSString().c_str());
 	strcat(szTemLogFormat, szTime);
 
-	return false;
+	SaveLogToCache(btLogType, szTemLogFormat, strlen(szTemLogFormat));
 }
 
 void CLog::SaveLogToCache(unsigned char btLogType, char * pszBuffer, size_t nLength)
@@ -72,7 +68,6 @@ void CLog::SaveLogToCache(unsigned char btLogType, char * pszBuffer, size_t nLen
 	if (Log_Assert == btLogType)
 		FlushLogToFile(Log_Num);
 
-	AutoLock autoLock(m_objLockLog[btLogType]);
 	if (1 == m_LogPrintFlag[btLogType])
 	{
 
@@ -92,8 +87,11 @@ void CLog::SaveLogToCache(unsigned char btLogType, char * pszBuffer, size_t nLen
 		this->FlushLogToFile(btLogType);
 	}
 
-	memcpy(&m_LogCache[btLogType][m_LogPos[btLogType]], pszBuffer, nLength);
-	m_LogPos[btLogType] += nLength;
+	{
+		AutoLock autoLock(m_objLockLog[btLogType]);
+		memcpy(&m_LogCache[btLogType][m_LogPos[btLogType]], pszBuffer, nLength);
+		m_LogPos[btLogType] += nLength;
+	}
 
 	if (Log_Assert == btLogType)
 		FlushLogToFile(btLogType);
@@ -114,7 +112,7 @@ void CLog::FlushLogToFile(unsigned char btLogType)
 		if (nullptr == m_LogCache[btLogType] || 0 == m_LogPos)
 			return;
 
-		strFile = m_vecLogFile[btLogType] + "_" + CTimeManager::Instance()->GetYYYYMMDDString() + ".log";
+		strFile = m_vecLogFile[btLogType] + "_" + m_strProcessName + CTimeManager::Instance()->GetYYYYMMDDString() + ".log";
 		FILE *pFile = fopen(strFile.c_str(), "a+");
 		if (nullptr == pFile)
 		{

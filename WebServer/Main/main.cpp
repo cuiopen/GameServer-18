@@ -1,25 +1,24 @@
 #include <cstdio>
-#include "../../Base/HttpServer.h"
+#include "WebServer.h"
 #include <iostream>
 #include <string>
 #include <unistd.h>
 
 void StarServer(int argc, char *argv[])
 {
-	if (CHttpServer::Instance()->InitServer("192.168.210.129", 6666))
+	if (!CWebServer::Instance()->InitServer(argc, argv))
 	{
-		if (!CHttpServer::Instance()->Start())
-		{
-			printf("[Error]Server Start failed! Function:%s, Line:%d\n", __FUNCTION__, __LINE__);
-			return;
-		}
-
-	}
-	else
-	{
-		printf("[Error]Server Init failed! Function:%s, Line:%d\n", __FUNCTION__, __LINE__);
+		printf("[Error]WebServer Init Failed! Function:%s, Line:%d\n", __FUNCTION__, __LINE__);
 		return;
 	}
+
+	if (!CWebServer::Instance()->Start())
+	{
+		printf("[Error]WebServer Start Failed! Function:%s, Line:%d\n", __FUNCTION__, __LINE__);
+		return;
+	}
+
+	printf("[Success]WebServer Start OK!");
 
 	while (true)
 	{

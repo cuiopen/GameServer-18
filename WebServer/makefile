@@ -13,7 +13,7 @@ OBJS    := $(patsubst %.c,%.o,$(patsubst %.cpp,%.o,$(SOURCE)))
 #target you can change test to what you want
 #目标文件名，输入任意你想要的执行文件名
 
-TARGET  := webserver
+TARGET  := ../Bin/webserver
   
 #compile and lib parameter
 #编译参数

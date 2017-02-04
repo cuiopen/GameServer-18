@@ -22,8 +22,8 @@ class CLog : public Singleton<CLog>
 {
 public:
 	~CLog();
-	bool InitServer(const char* pszName);
-	bool SaveLogEx(unsigned char usLogType, char * pszFunction, unsigned long unLine, pthread_t unThreadID, char * pszLog, ...);
+	bool Init(const char* pszName);
+	void SaveLogEx(unsigned char btLogType, const char * pszFunction, unsigned long unLine, pthread_t unThreadID, const char * pszLog, ...);
 
 private:
 	void SaveLogToCache(unsigned char btLogType, char* pszBuffer, size_t nLength);
