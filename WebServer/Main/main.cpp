@@ -18,11 +18,14 @@ void StarServer(int argc, char *argv[])
 		return;
 	}
 
-	printf("[Success]WebServer Start OK!");
+	printf("[Success]WebServer Start OK! PID:%d\n", getpid());
 
+	std::string strCMD;
 	while (true)
 	{
-		usleep(5);
+		std::cin >> strCMD;
+		if (strCMD == "exit")
+			exit(0);
 	}
 }
 
