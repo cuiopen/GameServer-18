@@ -35,7 +35,6 @@ bool CLog::Init(const char * pszName)
 	for (size_t i = 0; i < Log_Num; ++i)
 	{
 		m_LogSaveFlag[i] = 1;
-		m_LogCache[i] = nullptr;
 	}
 	return true;
 }
@@ -77,7 +76,7 @@ void CLog::SaveLogToCache(unsigned char btLogType, char * pszBuffer, size_t nLen
 	if (1 == m_LogSaveFlag[btLogType])
 	{
 		if (nullptr == m_LogCache[btLogType])
-			m_LogCache[btLogType] = new char[MAX_LOG_CACHE_SIZE];
+			m_LogCache[btLogType] = new std::atomic_char[MAX_LOG_CACHE_SIZE];
 		if (nullptr == m_LogCache[btLogType])
 			printf("[Error] Log Cache New Buffer Error, LogType:%hhd, Function:%s, Line:%d ", btLogType, __FUNCTION__, __LINE__);
 		m_LogPos[btLogType] = 0;
@@ -109,7 +108,7 @@ void CLog::FlushLogToFile(unsigned char btLogType)
 		if (nullptr == m_LogCache[btLogType] || 0 == m_LogPos)
 			return;
 
-		strFile = m_vecLogFile[btLogType] + "_" + m_strProcessName + CTimeManager::Instance()->GetYYYYMMDDString() + ".log";
+		strFile = m_vecLogFile[btLogType] + "_" + m_strProcessName +"_" + CTimeManager::Instance()->GetYYYYMMDDString() + ".log";
 		FILE *pFile = fopen(strFile.c_str(), "a+");
 		if (nullptr == pFile)
 		{

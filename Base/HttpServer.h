@@ -30,8 +30,7 @@ private:
 	pthread_t m_tThreadReciveID = 0;
 	std::deque<HttpPacket*> m_deqHttpRequest;
 	std::deque<HttpPacket*> m_deqFreeHttpPacket;
-	MyLock m_lockHttpServer;
-	
+	std::atomic_flag m_flagHttpServer = ATOMIC_FLAG_INIT;	
 };
 
 #endif // !_HttpServer_H

@@ -2,7 +2,7 @@
 #define _Thread_H
 #include <pthread.h>
 #include "Uncopiable.h"
-#include "Lock.h"
+#include <atomic>
 
 class CThread : Uncopiable
 {
@@ -35,7 +35,7 @@ private:
 	pthread_t m_tID = 0;
 	unsigned char m_btStatus = THREAD_STATUS_READY;
 	unsigned int m_uSleepMill = 5;
-	MyLock m_lockStatus;
+	std::atomic_uchar m_threadStatus;
 };
 
 #endif // _Thread_H

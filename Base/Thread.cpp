@@ -39,13 +39,11 @@ pthread_t CThread::GetThreadID () const
 
 unsigned char CThread::GetStatus()
 {
-	AutoLock autoLock(m_lockStatus);
 	return m_btStatus;
 }
 
 bool CThread::IsRun()
 {
-	AutoLock autoLock(m_lockStatus);
 	if (THREAD_STATUS_RUNNING == m_btStatus)
 		return true;
 	return false;
@@ -53,7 +51,6 @@ bool CThread::IsRun()
 
 bool CThread::IsClose()
 {
-	AutoLock autoLock(m_lockStatus);
 	return (THREAD_STATUS_EXIT == m_btStatus || THREAD_STATUS_EXITING == m_btStatus);
 }
 
@@ -69,7 +66,6 @@ void CThread::Join()
 
 void CThread::SetStatus(unsigned char btStatus)
 {
-	AutoLock autoLock(m_lockStatus);
 	m_btStatus = btStatus;
 }
 

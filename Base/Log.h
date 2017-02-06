@@ -35,7 +35,7 @@ private:
 	std::string m_strProcessName;
 	unsigned char m_LogSaveFlag[Log_Num] = { 0 };
 	unsigned char m_LogPrintFlag[Log_Num] = { 0 };
-	std::atomic<char*> m_LogCache[Log_Num];
+	std::atomic_char* m_LogCache[Log_Num] = { nullptr };
 	unsigned long m_LogPos[Log_Num] = { 0 };
 };
 

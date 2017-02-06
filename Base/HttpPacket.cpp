@@ -15,7 +15,7 @@ void HttpPacket::Rest()
 
 bool HttpPacket::Execute()
 {
-	SaveDebugLog("Get Message:%s", m_szBuffer);
+	SaveAssertLog("Get Message:%s", m_szBuffer);
 
 	char html[] =
 		"HTTP/1.1 200 OK\r\n"

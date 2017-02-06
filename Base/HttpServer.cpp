@@ -9,7 +9,7 @@
 
 CHttpServer::~CHttpServer()
 {
-	AutoLock lock(m_lockHttpServer);
+	while (m_flagHttpServer.test_and_set());
 	for (auto i = m_deqFreeHttpPacket.begin(), e = m_deqFreeHttpPacket.end(); i != e; ++i)
 	{
 		SAFE_DELETE(*i);
@@ -21,6 +21,8 @@ CHttpServer::~CHttpServer()
 		SAFE_DELETE(*i);
 	}
 	m_deqHttpRequest.clear();
+	
+	m_flagHttpServer.clear();
 }
 
 bool CHttpServer::InitServer(const char * pszIP, unsigned short int nPort)
@@ -54,7 +56,6 @@ bool CHttpServer::InitServer(const char * pszIP, unsigned short int nPort)
 
 	unsigned short nTimeout = 5000;
 	setsockopt(m_socketServer, SOL_SOCKET, SO_RCVTIMEO, (const char*)&nTimeout, sizeof(nTimeout));
-
 	return true;
 }
 
@@ -154,21 +155,24 @@ void *CHttpServer::ThreadRecive(void * pParm)
 
 void CHttpServer::AddFreeHttpPacket(HttpPacket * pPacket)
 {
-	AutoLock lock(m_lockHttpServer);
+	while (m_flagHttpServer.test_and_set());
 	m_deqFreeHttpPacket.push_back(pPacket);
+	m_flagHttpServer.clear();
 }
 
 HttpPacket * CHttpServer::PoPFreeHttpPacket()
 {
-	AutoLock lock(m_lockHttpServer);
+	while (m_flagHttpServer.test_and_set());
 	if (!m_deqFreeHttpPacket.empty())
 	{
 		HttpPacket *pPacket = m_deqFreeHttpPacket.front();
 		m_deqFreeHttpPacket.pop_front();
 		pPacket->Rest();
+		m_deqFreeHttpPacket.clear();
 		return pPacket;
 	}
 
+	m_flagHttpServer.clear();
 	HttpPacket *pPacket = new HttpPacket();
 	if (nullptr == pPacket)
 		return nullptr;
@@ -177,22 +181,30 @@ HttpPacket * CHttpServer::PoPFreeHttpPacket()
 
 void CHttpServer::AddHttpPacket(HttpPacket * pPacket)
 {
-	AutoLock lock(m_lockHttpServer);
+	while (m_flagHttpServer.test_and_set());
 	m_deqHttpRequest.push_back(pPacket);
+	m_flagHttpServer.clear();
 }
 
 HttpPacket * CHttpServer::PoPHttpPacket()
 {
-	AutoLock lock(m_lockHttpServer);
+	while (m_flagHttpServer.test_and_set());
 	if (m_deqHttpRequest.empty())
+	{
+		m_flagHttpServer.clear();
 		return nullptr;
+	}
+	
 	HttpPacket *pPacket = m_deqHttpRequest.front();
 	m_deqHttpRequest.pop_front();
+	m_flagHttpServer.clear();
 	return pPacket;
 }
 
 size_t CHttpServer::GetHttpPacketSize()
 {
-	AutoLock lock(m_lockHttpServer);
-	return m_deqHttpRequest.size();
+	while (m_flagHttpServer.test_and_set());
+	size_t nResult =  m_deqHttpRequest.size();
+	m_flagHttpServer.clear();
+	return nResult;
 }
