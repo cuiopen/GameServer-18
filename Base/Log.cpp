@@ -132,7 +132,7 @@ void CLog::FlushLogToFile(unsigned char btLogType)
 			if (nullptr == m_LogCache[i] || 0 == m_LogPos)
 				continue;
 
-			strFile = m_vecLogFile[i] + "_" + CTimeManager::Instance()->GetYYYYMMDDString() + ".log";
+			strFile = m_vecLogFile[i] + "_" + m_strProcessName + "_"+ CTimeManager::Instance()->GetYYYYMMDDString() + ".log";
 			FILE *pFile = fopen(strFile.c_str(), "a+");
 			if (nullptr == pFile)
 			{
